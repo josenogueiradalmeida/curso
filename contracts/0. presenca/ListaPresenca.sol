@@ -6,6 +6,13 @@ contract ListaPresenca {
     mapping (uint => address[]) private lista;
     enum Aula {Lab1,Lab2,Lab3} Aula aula;
     
+    function confirmarPresenca(Aula _lab) public {
+        address enderecoQueDesejaMarcarPresenca = msg.sender;
+        require( !encontraPresenca(enderecoQueDesejaMarcarPresenca, _lab), "Aluno já marcou presença no dia.");
+        address[] storage enderecos = lista[(uint)(_lab)];
+        enderecos.push(enderecoQueDesejaMarcarPresenca);
+    }
+
     function encontraPresenca(address _enderecoProcurado, Aula _lab) private returns (bool) {
         address[] storage enderecos = lista[(uint)(_lab)];
         for (uint i=0; i < enderecos.length; i++) {
@@ -13,13 +20,6 @@ contract ListaPresenca {
                 return true;
         }
         return false;        
-    }
-
-    function confirmarPresenca(Aula _lab) public {
-        address enderecoQueDesejaMarcarPresenca = msg.sender;
-        require( !encontraPresenca(enderecoQueDesejaMarcarPresenca, _lab), "Aluno já marcou presença no dia.");
-        address[] storage enderecos = lista[(uint)(_lab)];
-        enderecos.push(enderecoQueDesejaMarcarPresenca);
     }
 
     function mostrarQuantidadePresentesDaAula(Aula _lab) public view returns (uint) {
