@@ -8,12 +8,12 @@ contract ListaPresenca {
     
     function confirmarPresenca(Aula _lab) public {
         address enderecoQueDesejaMarcarPresenca = msg.sender;
-        require( !encontraPresenca(enderecoQueDesejaMarcarPresenca, _lab), "Aluno já marcou presença no dia.");
+        require( !encontrarPresenca(enderecoQueDesejaMarcarPresenca, _lab), "Aluno já marcou presença no dia.");
         address[] storage enderecos = lista[(uint)(_lab)];
         enderecos.push(enderecoQueDesejaMarcarPresenca);
     }
 
-    function encontraPresenca(address _enderecoProcurado, Aula _lab) private returns (bool) {
+    function encontrarPresenca(address _enderecoProcurado, Aula _lab) public returns (bool) {
         address[] storage enderecos = lista[(uint)(_lab)];
         for (uint i=0; i < enderecos.length; i++) {
             if ( enderecos[i] == _enderecoProcurado )
