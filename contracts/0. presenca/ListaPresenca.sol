@@ -13,7 +13,7 @@ contract ListaPresenca {
         enderecos.push(enderecoQueDesejaMarcarPresenca);
     }
 
-    function encontrarPresenca(address _enderecoProcurado, Aula _lab) public returns (bool) {
+    function encontrarPresenca(address _enderecoProcurado, Aula _lab) public view returns (bool) {
         address[] storage enderecos = lista[(uint)(_lab)];
         for (uint i=0; i < enderecos.length; i++) {
             if ( enderecos[i] == _enderecoProcurado )
