@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.6;
+pragma solidity ^0.7.2;
 
 contract ListaPresenca {
     
@@ -8,7 +8,7 @@ contract ListaPresenca {
     
     function confirmarPresenca(Aula _lab) public {
         address enderecoQueDesejaMarcarPresenca = msg.sender;
-        require( !encontrarPresenca(enderecoQueDesejaMarcarPresenca, _lab), "Aluno já marcou presença no dia.");
+        require( !encontrarPresenca(enderecoQueDesejaMarcarPresenca, _lab), "Aluno ja marcou presenca no dia.");
         address[] storage enderecos = lista[(uint)(_lab)];
         enderecos.push(enderecoQueDesejaMarcarPresenca);
     }

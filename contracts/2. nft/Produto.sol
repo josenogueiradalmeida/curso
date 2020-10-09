@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.6;
+pragma solidity ^0.7.2;
 
 contract Produto {
     
@@ -31,7 +31,7 @@ contract Produto {
     
     
     function criaProduto(string memory  _nomeProduto) public {
-        require ( buscaProduto(_nomeProduto) == -1 , "Produto já existe e tem dono!" );
+        require ( buscaProduto(_nomeProduto) == -1 , "Produto ja existe e tem dono!" );
         produtos.push(_nomeProduto)  ;
         dono[_nomeProduto] = msg.sender;
         quantidade[msg.sender]++;
