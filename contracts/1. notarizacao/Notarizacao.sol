@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.7.2;
+pragma solidity ^0.7.0;
 
 //Baseado no github.com/aostrun
 contract Notarizacao{
@@ -16,7 +16,7 @@ contract Notarizacao{
         IDcorrente = 0;
     }
     
-    function criaRegistro(string memory hash) external returns (uint256) {	
+    function criaRegistro(string memory hash) external  returns (uint256) {	
         Registro storage novoRegistro = registros[IDcorrente]; 
         novoRegistro.hash = hash;		   
         novoRegistro.epoca = block.timestamp;
