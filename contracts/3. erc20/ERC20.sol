@@ -43,7 +43,7 @@ contract ERC20 is IERC20 {
     string private _name;
     string private _symbol;
     uint8 private _decimals;
-
+    address public _dono;
     /**
      * @dev Sets the values for {name} and {symbol}, initializes {decimals} with
      * a default value of 18.
@@ -57,6 +57,11 @@ contract ERC20 is IERC20 {
         _name = name;
         _symbol = symbol;
         _decimals = 18;
+        _dono = msg.sender;
+    }
+    modifier apenasDono() {
+        require(msg.sender == _dono, "esse endereco nao e o dono");
+        _;
     }
 
     /**
@@ -157,7 +162,7 @@ contract ERC20 is IERC20 {
      *
      * - `to` cannot be the zero address.
      */
-    function _mint(address account, uint256 amount) internal virtual {
+    function _mint(address account, uint256 amount) public apenasDono {
         require(account != address(0), "ERC20: mint to the zero address");
 
 //        _beforeTokenTransfer(address(0), account, amount);
@@ -178,7 +183,7 @@ contract ERC20 is IERC20 {
      * - `account` cannot be the zero address.
      * - `account` must have at least `amount` tokens.
      */
-    function _burn(address account, uint256 amount) internal virtual {
+    function _burn(address account, uint256 amount) public apenasDono {
         require(account != address(0), "ERC20: burn from the zero address");
 
 //        _beforeTokenTransfer(account, address(0), amount);
