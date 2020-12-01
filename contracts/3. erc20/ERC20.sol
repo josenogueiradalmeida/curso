@@ -49,7 +49,7 @@ contract ERC20 is IERC20 {
      * All three of these values are immutable: they can only be set once during
      * construction.
      */
-    constructor (string memory name, string memory symbol) public {
+    constructor (string memory name, string memory symbol)  {
         _name = name;
         _symbol = symbol;
         _decimals = 18;
@@ -63,7 +63,7 @@ contract ERC20 is IERC20 {
     /**
      * @dev Returns the name of the token.
      */
-    function name() public view returns (string memory) {
+    function getName() public view returns (string memory) {
         return _name;
     }
 
@@ -71,7 +71,7 @@ contract ERC20 is IERC20 {
      * @dev Returns the symbol of the token, usually a shorter version of the
      * name.
      */
-    function symbol() public view returns (string memory) {
+    function getSymbol() public view returns (string memory) {
         return _symbol;
     }
 
@@ -176,3 +176,4 @@ contract ERC20 is IERC20 {
 
  
 }
+
