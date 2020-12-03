@@ -17,7 +17,8 @@ contract InovaToken {
     address public _dono;
     
     event Transfer(address indexed from, address indexed to, uint256 value);
-    
+    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+
     constructor(string memory name, string memory symbol) {
         _name = name;
         _symbol = symbol;
@@ -30,6 +31,10 @@ contract InovaToken {
         _;
     }
     
+    function name() public view returns (string memory) {
+        return _name;
+    }
+
     function symbol() public view returns (string memory) {
         return _symbol;
     }
@@ -46,17 +51,18 @@ contract InovaToken {
         return _balances[account];
     }
     
-    function _transfer(address sender, address recipient, uint256 amount) internal virtual {
+    function transferFrom(address sender, address recipient, uint256 amount) public returns (bool success) {
         require(sender != address(0), "ERC20: transferencia do endereco zero");
         require(recipient != address(0), "ERC20: transferencia para endereco zero");
         
         _balances[sender] = _balances[sender].sub(amount, "ERC20: transferencia excede o saldo");
         _balances[recipient] = _balances[recipient].add(amount);
         emit Transfer(sender, recipient, amount);
+        return true;
     }
     
     function transfer(address recipient, uint256 amount) public virtual returns (bool) {
-        _transfer(msg.sender, recipient, amount);
+        transferFrom(msg.sender, recipient, amount);
         return true;
     }
     
@@ -73,5 +79,16 @@ contract InovaToken {
         _totalSupply = _totalSupply.sub(amount);
         emit Transfer(account, address(0), amount);
     }
+
+    
+    function approve(address _spender, uint256 _value) public returns (bool success) {
+        return true;
+    }
+    
+    function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
+        return 0;
+    }
+
+
     
 }
